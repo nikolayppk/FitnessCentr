@@ -23,7 +23,7 @@ public class Main {
     static List<String> servicesOptimum = Arrays.asList(service2, service3, service4);
     static Map<Integer, Membership> mapMembership = new HashMap<>();
     /*Файл для записи покупок*/
-    static File file = new File("/Users/lushchenko/Desktop/TaskJava/src/main/resources/listBuyId.txt");
+    static File file = new File("listBuyId.txt");
 
     public static void main(String[] args) throws IOException {
 
