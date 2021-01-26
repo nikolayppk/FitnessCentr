@@ -1,4 +1,4 @@
-package FitnessCentr;
+package ru.lushenko.fitnesscentr;
 
 import java.util.HashMap;
 import java.util.List;
@@ -24,7 +24,7 @@ public class Membership {
     }
 
     /*Отображение подробной информации абонемента*/
-    public void showDescriotionMembership(){
+    public void showDescriptionMembership(){
         System.out.println(this.name + listService + " - " + this.price + " руб");
     }
     /*Отображение наименований абонемента*/

@@ -1,4 +1,4 @@
-package FitnessCentr;
+package ru.lushenko.fitnesscentr;
 
 import java.io.*;
 import java.util.Arrays;
@@ -72,7 +72,7 @@ public class Main {
     /*Метод для отображение всех абонементов и сервисов*/
     public static void showAllMembership(Map<Integer, Membership> mapMembership){
         for (int i = 1; i <= mapMembership.size(); i++)
-            mapMembership.get(i).showDescriotionMembership();
+            mapMembership.get(i).showDescriptionMembership();
     }
     /*Метод для выбора абонемента при покупке*/
     public static void selectMembershipForBuy(Map<Integer, Membership> mapMembership){
@@ -104,10 +104,10 @@ public class Main {
                         Buy buy = new Buy(mapMembership.get(i).getName());
                         /*Выполняем запись покупки*/
                         FileWriter writer = new FileWriter(file, true);
-                        writer.write(buy.getBuyID() + "\n" + buy.getBuyName() + "\n");
+                        writer.write(buy.getBuyId() + "\n" + buy.getBuyName() + "\n");
                         writer.close();
                         /*Отображение ID покупки*/
-                        System.out.println("Вы выбрали абонемент " + mapMembership.get(i).getName() + ", ID покупки: " + buy.getBuyID());
+                        System.out.println("Вы выбрали абонемент " + mapMembership.get(i).getName() + ", ID покупки: " + buy.getBuyId());
                         doneBuy = true;
                         break;
                     }

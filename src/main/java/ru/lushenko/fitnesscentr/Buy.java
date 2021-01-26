@@ -1,4 +1,4 @@
-package FitnessCentr;
+package ru.lushenko.fitnesscentr;
 
 import java.io.*;
 import java.util.Random;
@@ -6,19 +6,16 @@ import java.util.Random;
 public class Buy {
     Buy(String buyName) throws IOException {
         this.buyName = buyName;
-        this.buyID = generationRandomId(5);
+        this.buyId = generationRandomId(5);
 
-//        FileWriter writer = new FileWriter("notes3.txt", true);
-//        writer.write(this.buyID + "\n");
-//        writer.close();
     }
 
-    private String buyID;
+    private String buyId;
     private String buyName;
 
 
-    public String getBuyID() {
-        return this.buyID;
+    public String getBuyId() {
+        return this.buyId;
     }
     public String getBuyName() {
         return this.buyName;
