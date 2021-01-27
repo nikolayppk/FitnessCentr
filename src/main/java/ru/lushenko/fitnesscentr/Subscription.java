@@ -4,13 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Membership {
-    Membership (String name, int price, List<String> listService){
+public class Subscription {
+    Subscription(String name, int price, List<String> listService){
         this.listService = listService;
         this.name = name;
         this.price = price;
     }
-    static int idMembership;
+    static int idSubscription;
     private String name;
     private int price;
     private List<String> listService;
@@ -20,20 +20,20 @@ public class Membership {
         return this.name;
     }
     public static int getId(){
-        return idMembership;
+        return idSubscription;
     }
 
     /*Отображение подробной информации абонемента*/
-    public void showDescriptionMembership(){
+    public void showDescriptionSubscription(){
         System.out.println(this.name + listService + " - " + this.price + " руб");
     }
     /*Отображение наименований абонемента*/
-    public void showNameMembership(int i){
+    public void showNameSubscription(int i){
         System.out.println("["+i+"] " + this.name);
     }
 
     /*Покупка абонемента*/
-    public void buyMembership(String name){
+    public void buySubscription(String name){
         Map<String, Integer> buyID = new HashMap<>();
         buyID.put(name, 11);
     }
