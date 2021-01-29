@@ -1,18 +1,16 @@
-package ru.lushenko.fitnesscentr;
+package ru.lushenko.fitnesscentr.domain;
 
 import java.io.*;
 import java.util.Random;
 
 public class Buy {
-    Buy(String buyName) throws IOException {
+    public Buy(String buyName) throws IOException {
         this.buyName = buyName;
         this.buyId = generationRandomId(5);
-
     }
 
     private String buyId;
     private String buyName;
-
 
     public String getBuyId() {
         return this.buyId;
