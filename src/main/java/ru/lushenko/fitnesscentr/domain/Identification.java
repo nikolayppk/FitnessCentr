@@ -1,5 +1,5 @@
 package ru.lushenko.fitnesscentr.domain;
 
-public interface Identificator {
+public interface Identification {
     String getId();
 }

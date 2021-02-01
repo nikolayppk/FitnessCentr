@@ -1,9 +1,6 @@
 package ru.lushenko.fitnesscentr.domain;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.util.Random;
 
 public class Action {
 
@@ -29,27 +26,34 @@ public class Action {
     /***
      * Метод для проверки ID покупки
      * @param id - ID покупки
-     * @param file - текстовый файл в котором выполняем поиск
+     * @param repository - репозиторий с покупками
      */
-    public static void checkBuyID(String id, File file) throws IOException {
-        //Выполняем чтение файла с сохраненными id
-        FileReader fileReader = new FileReader(file);
-        BufferedReader reader = new BufferedReader(fileReader);
-        // считаем сначала первую строку
-        String line = reader.readLine();
+    public static void checkBuyID(String id, Repository<String, Buy> repository) {
         boolean checkStatus = false;
-        while (line != null) {
-            if (line.equals(id)){
+        for (Buy buy : repository.getAll()){
+            if (buy.getId().equals(id)){
                 //Считываем наименование абонемента по найденному ID
-                line = reader.readLine();
-                System.out.println("Ваш абонемент " + line);
+                System.out.println("Ваш абонемент " + buy.getBuyName());
                 checkStatus = true;
-                break;}
-            // считываем остальные строки в цикле
-            line = reader.readLine();
+                break;
+            }
         }
         if (checkStatus == false){
             System.out.println("По данному ID покупка не найдена");
         }
+    }
+
+    /*Генерируем ID покупки*/
+    public static String generationRandomId(int length) {
+        String mCHAR = "0123456789";
+        int strLength = length;
+        Random random = new Random();
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < strLength; i++) {
+            int number = random.nextInt(mCHAR.length());
+            char ch = mCHAR.charAt(number);
+            builder.append(ch);
+        }
+        return builder.toString();
     }
 }

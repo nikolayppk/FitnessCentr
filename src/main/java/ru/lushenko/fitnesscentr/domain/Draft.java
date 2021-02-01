@@ -2,7 +2,7 @@ package ru.lushenko.fitnesscentr.domain;
 
 import java.io.File;
 
-public class Run {
+public class Draft {
     Menu mainMenu = new Menu();
     /*Файл для записи покупок*/
     static File file = new File("listBuyId.txt");

@@ -1,36 +1,30 @@
 package ru.lushenko.fitnesscentr.domain;
 
-import java.io.*;
-import java.util.Random;
+import java.util.Objects;
 
-public class Buy {
-    public Buy(String buyName) throws IOException {
+public class Buy implements Identification {
+    public Buy(String buyName, String buyId) {
         this.buyName = buyName;
-        this.buyId = generationRandomId(5);
+        this.buyId = buyId;
     }
 
     private String buyId;
     private String buyName;
 
-    public String getBuyId() {
-        return this.buyId;
-    }
-    public String getBuyName() {
-        return this.buyName;
+    @Override
+    public String getId() { return this.buyId; }
+    public String getBuyName() { return this.buyName; }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Buy)) return false;
+        Buy buy = (Buy) o;
+        return buyId.equals(buy.buyId);
     }
 
-    /*Генерируем ID покупки*/
-    private String generationRandomId(int length) {
-        String mCHAR = "0123456789";
-        int strLenght = length;
-        Random random = new Random();
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < strLenght; i++) {
-            int number = random.nextInt(mCHAR.length());
-            char ch = mCHAR.charAt(number);
-            builder.append(ch);
-        }
-        return builder.toString();
+    @Override
+    public int hashCode() {
+        return Objects.hash(buyId);
     }
-
 }

@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class InMemoryRepository<T extends Identificator> implements Repository<String, T>{
+public class InMemoryRepository<T extends Identification> implements Repository<String, T>{
 
     private final Map<String, T> items = new HashMap<>();
 

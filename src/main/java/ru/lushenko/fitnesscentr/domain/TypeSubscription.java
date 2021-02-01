@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class TypeSubscription implements Identificator{
+public class TypeSubscription implements Identification {
 
     public String getId() {
         return id;
