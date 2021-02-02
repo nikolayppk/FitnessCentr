@@ -1,39 +1,39 @@
 package ru.lushenko.fitnesscentr.domain;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Menu {
 
-    private String name;
-    private String position;
     private String title;
-    private Map<String, String> map =new HashMap<>();
+
+    private Map<String, String> items = new HashMap<>();
 
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public String getPosition() {
-        return position;
+    public List<String> getAllItems() {
+        return new ArrayList(items.values());
     }
 
     public void addItem(String position, String name){
-        map.put(position, name);
+        items.put(position, name);
     }
 
-    public void printMenu() {
-        System.out.println(title);
-        for (Map.Entry<String, String> entry : map.entrySet())
-            System.out.println(entry.getKey() + " - " + entry.getValue());
+    public void showMenu(){
+        System.out.println(getTitle());
+        for (Map.Entry<String, String> map : items.entrySet()) {
+            System.out.println(map.getKey() + " - " + map.getValue());
+        }
     }
-
-    public void addAction(){
-        Action action = new Action();
+    public void printNameItem(String positionItem) {
+        System.out.println(items.get(positionItem));
     }
-
 }

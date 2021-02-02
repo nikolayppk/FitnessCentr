@@ -27,19 +27,6 @@ public class TypeSubscription implements Identification {
 
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof TypeSubscription)) return false;
-        TypeSubscription that = (TypeSubscription) o;
-        return getId().equals(that.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId());
-    }
-
     public List<FitnessService> getServices() {
         return services;
     }
@@ -53,5 +40,18 @@ public class TypeSubscription implements Identification {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TypeSubscription)) return false;
+        TypeSubscription that = (TypeSubscription) o;
+        return getId().equals(that.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }
