@@ -6,15 +6,16 @@ import java.io.*;
 
 public class Main {
     /*Файл для записи покупок*/
-    static File file = new File("listBuyId.txt");
+    private final File file = new File("listBuyId.txt");
     /*Инициализируем переменные*/
-    static Repository<String, TypeSubscription> typeSubscriptionRepository = new InMemoryRepository<>();
-    static Repository<String, Buy> buyRepository = new BuyRepository(file);
-    static HardCodeFillSubscription hardCodeFillSubscription = new HardCodeFillSubscription();
-    static Menu mainMenu = new Menu();
-    static Menu subMenu = new Menu();
+    private final Repository<String, TypeSubscription> typeSubscriptionRepository = new InMemoryRepository<>();
+    private final Repository<String, Buy> buyRepository = new InMemoryRepository<>();
+    //static Repository<String, Buy> buyRepository = new BuyRepository(file);
+    private final HardCodeFillSubscription hardCodeFillSubscription = new HardCodeFillSubscription();
+    private final Menu mainMenu = new Menu();
+    private final Menu subMenu = new Menu();
 
-    public static void main(String[] args) {
+    public void run() {
         /*Создаем меню*/
         FillMainMenu.createMenu(mainMenu);
         FillMainMenu.createSubMenu(subMenu);
@@ -51,5 +52,9 @@ public class Main {
             }
             else break;
         }
+    }
+
+    public static void main(String[] args) {
+        new Main().run();
     }
 }

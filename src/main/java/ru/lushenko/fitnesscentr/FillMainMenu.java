@@ -1,4 +1,6 @@
-package ru.lushenko.fitnesscentr.domain;
+package ru.lushenko.fitnesscentr;
+
+import ru.lushenko.fitnesscentr.domain.Menu;
 
 public class FillMainMenu {
 

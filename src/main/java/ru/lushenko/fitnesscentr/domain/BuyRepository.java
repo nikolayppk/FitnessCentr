@@ -13,7 +13,6 @@ public class BuyRepository implements Repository<String, Buy>{
     public BuyRepository(File file) {
         this.file = file;
     }
-    private final Map<String, Buy> items = new HashMap<>();
 
     @Override
     public Buy get(String s) {
@@ -35,6 +34,7 @@ public class BuyRepository implements Repository<String, Buy>{
     @Override
     public List<Buy> getAll() {
         try {
+            List<Buy> items = new ArrayList<>();
             FileReader fileReader = new FileReader(file);
             BufferedReader reader = new BufferedReader(fileReader);
             // первая строчка ID покупки
@@ -44,13 +44,13 @@ public class BuyRepository implements Repository<String, Buy>{
             boolean checkStatus = false;
             while (nameBuy != null) {
                 Buy buy = new Buy(nameBuy, idBuy);
-                this.items.put(buy.getId(), buy);
+                items.add(buy);
                 idBuy = reader.readLine();
                 nameBuy = reader.readLine();
             }
+            return items;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return new ArrayList<>(this.items.values());
     }
 }
