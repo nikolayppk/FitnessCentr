@@ -15,8 +15,4 @@ public class ConsoleDialog implements Dialog{
             throw new RuntimeException(e);
         }
     }
-
-    public static void main(String[] args) {
-        System.out.println(new ConsoleDialog().ask("Как дела"));
-    }
 }

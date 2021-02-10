@@ -19,27 +19,26 @@ public class TypeSubscription implements Identification {
         return price;
     }
 
-    public TypeSubscription(String id, String name, int price, List<FitnessService> services) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.services = services;
-
+    public String getName() {
+        return name;
     }
 
     public List<FitnessService> getServices() {
         return services;
     }
 
-    public void printDescriptorSubscription(){
-        List<String> list = new ArrayList<>();
-        for (FitnessService service: services)
-           list.add(service.getName());
-        System.out.println(name + ": " + list + " - " + price + " рублей");
+    public TypeSubscription(String id, String name, int price, List<FitnessService> services) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.services = services;
     }
 
-    public String getName() {
-        return name;
+    public String getDescription() {
+        List<String> list = new ArrayList<>();
+        for (FitnessService service : services)
+            list.add(service.getName());
+        return name + ": " + list + " - " + price + " рублей";
     }
 
     @Override
