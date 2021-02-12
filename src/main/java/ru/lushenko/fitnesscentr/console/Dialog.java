@@ -1,7 +1,5 @@
 package ru.lushenko.fitnesscentr.console;
 
-import java.io.IOException;
-
 public interface Dialog {
 
     /**
@@ -10,6 +8,5 @@ public interface Dialog {
      * @return - ответ
      */
     String  ask(String question) ;
-
 
 }

@@ -14,20 +14,22 @@ public class SelectBuyAction implements Action {
     private String question;
     private Repository<String, TypeSubscription> repository;
     private Repository<String, Buy> buyRepository;
+    private ConsoleDialog consoleDialog;
 
-    public SelectBuyAction(String title, String question, Repository<String, TypeSubscription> repository, Repository<String, Buy> buyRepository) {
+    public SelectBuyAction(String title, String question, Repository<String, TypeSubscription> repository, Repository<String, Buy> buyRepository, ConsoleDialog consoleDialog) {
         this.title = title;
         this.question = question;
         this.repository = repository;
         this.buyRepository = buyRepository;
+        this.consoleDialog = consoleDialog;
     }
 
     @Override
     public void run() {
         printSubscription();
-        System.out.println(repository.getAll().size() + 1 + " - Назад");
+        consoleDialog.printText(repository.getAll().size() + 1 + " - Назад");
         buySubscription();
-        System.out.println("*********************************");
+        consoleDialog.printText("*********************************");
     }
 
     @Override
@@ -40,7 +42,7 @@ public class SelectBuyAction implements Action {
      */
     private void printSubscription() {
         for (TypeSubscription typeSubscription : this.repository.getAll()) {
-            System.out.println(typeSubscription.getId() + " - " + typeSubscription.getName());
+            consoleDialog.printText(typeSubscription.getId() + " - " + typeSubscription.getName());
         }
     }
 
@@ -48,14 +50,13 @@ public class SelectBuyAction implements Action {
      * Метод для выполнения покупки
      */
     private void buySubscription() {
-        //Вводим позицию абонемента, который хотим купить
         boolean doneBuy = false;
         while (doneBuy == false) {
-            String position = new ConsoleDialog().ask(question);
+            String position = consoleDialog.ask(question);
             doneBuy = false;
             for (TypeSubscription typeSubscription : repository.getAll()) {
-                int kol = repository.getAll().size() + 1;
-                String numberForExit = "" + kol;
+                int numberForExitInt = repository.getAll().size() + 1;
+                String numberForExit = "" + numberForExitInt;
                 if (position.equals(numberForExit)) {
                     doneBuy = true;
                     break;
@@ -64,13 +65,13 @@ public class SelectBuyAction implements Action {
                     /*Выполняем запись покупки*/
                     buyRepository.add(buy);
                     /*Отображение ID покупки*/
-                    System.out.println("Вы выбрали абонемент " + typeSubscription.getName() + ", ID покупки: " + buy.getId());
+                    consoleDialog.printText("Вы выбрали абонемент " + typeSubscription.getName() + ", ID покупки: " + buy.getId());
                     doneBuy = true;
                     break;
                 }
             }
             if (doneBuy == false)
-                System.out.println("Введенное значение отсутствует в списке. Введите корректное значение.");
+                consoleDialog.printText("Введенное значение отсутствует в списке. Введите корректное значение.");
         }
     }
 

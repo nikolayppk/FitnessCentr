@@ -4,6 +4,7 @@ public class BreakAction implements Action{
 
     private String title;
 
+    //TODO System.exit убрать
     @Override
     public void run() {
         System.exit(0);

@@ -1,9 +1,9 @@
 package ru.lushenko.fitnesscentr.console;
 
-public interface Action {
+public interface MenuAction extends Action{
 
-    void run();
-
-// TODO удалить
     String title();
+
+
+
 }

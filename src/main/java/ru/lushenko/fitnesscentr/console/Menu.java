@@ -27,8 +27,13 @@ public class Menu implements Action {
         return title;
     }
 
+//    private String question(){
+//        for (List<Action> action )
+//    }
+
 
     private String question() {
         return this.actions.stream().map(Action::title).collect(Collectors.joining("\n", title, ""));
     }
+
 }

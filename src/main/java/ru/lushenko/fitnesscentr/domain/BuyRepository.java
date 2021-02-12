@@ -2,9 +2,7 @@ package ru.lushenko.fitnesscentr.domain;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class BuyRepository implements Repository<String, Buy>{
 
@@ -12,6 +10,9 @@ public class BuyRepository implements Repository<String, Buy>{
 
     public BuyRepository(File file) {
         this.file = file;
+    }
+    public BuyRepository(String fileName) {
+        this(new File(fileName));
     }
 
     @Override

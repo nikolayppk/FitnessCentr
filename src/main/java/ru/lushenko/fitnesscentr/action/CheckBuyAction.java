@@ -10,18 +10,20 @@ public class CheckBuyAction implements Action {
     private String title;
     private String question;
     private Repository<String, Buy> repository;
+    private ConsoleDialog consoleDialog;
 
 
-    public CheckBuyAction(String title, String question, Repository<String, Buy> repository) {
+    public CheckBuyAction(String title, String question, Repository<String, Buy> repository, ConsoleDialog consoleDialog) {
         this.title = title;
         this.question = question;
         this.repository = repository;
+        this.consoleDialog = consoleDialog;
     }
 
     @Override
     public void run() {
         checkBuy();
-        System.out.println("*********************************");
+        consoleDialog.printText("*********************************");
     }
 
     @Override
@@ -33,18 +35,17 @@ public class CheckBuyAction implements Action {
      * Метод для проверки ID покупки
      */
     private void checkBuy() {
-        String id = new ConsoleDialog().ask(question);
+        String id = consoleDialog.ask(question);
         boolean checkStatus = false;
         for (Buy buy : repository.getAll()) {
             if (buy.getId().equals(id)) {
                 //Считываем наименование абонемента по найденному ID
-                System.out.println("Ваш абонемент - " + buy.getBuyName());
+                consoleDialog.printText("Ваш абонемент - " + buy.getBuyName());
                 checkStatus = true;
-                break;
-            }
+                break; }
         }
         if (checkStatus == false) {
-            System.out.println("По данному ID покупка не найдена");
+            consoleDialog.printText("По данному ID покупка не найдена");
         }
     }
 }
