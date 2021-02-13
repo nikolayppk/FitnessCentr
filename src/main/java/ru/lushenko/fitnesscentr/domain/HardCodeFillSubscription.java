@@ -10,7 +10,7 @@ public class HardCodeFillSubscription {
     FitnessService groupsTraining = new FitnessService("Групповые тренировки");
     FitnessService personalTraining = new FitnessService("Индивидуальные тренировки");
 
-    public void fill(Repository<String, TypeSubscription> repository){
+    public void fill(Repository<String, TypeSubscription> repository) {
         repository.add(new TypeSubscription("1", "Премиум", 50000, Arrays.asList(swimming, gym, run, groupsTraining, personalTraining)));
         repository.add(new TypeSubscription("2", "Стандарт", 30000, Arrays.asList(swimming, gym, run, groupsTraining)));
         repository.add(new TypeSubscription("3", "Оптимум", 10000, Arrays.asList(gym, run, groupsTraining)));

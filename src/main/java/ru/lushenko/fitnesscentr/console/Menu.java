@@ -1,39 +1,34 @@
 package ru.lushenko.fitnesscentr.console;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Menu implements Action {
 
-    private final Dialog dialog;
     private final String title;
-    private final List<Action> actions;
+    private final ConsoleDialog dialog;
+    private final List<DefaultMenuAction> menuActions;
 
-    public Menu(Dialog dialog, String title, List<Action> actions) {
-        this.dialog = dialog;
+    public Menu(String title, ConsoleDialog dialog, List<DefaultMenuAction> menuActions) {
         this.title = title;
-        this.actions = actions;
+        this.dialog = dialog;
+        this.menuActions = menuActions;
     }
 
     @Override
     public void run() {
-        String answer = this.dialog.ask(question());
-        int number = Integer.parseInt(answer);
-        this.actions.get(number).run();
+        while (true) {
+            dialog.printText(this.title);
+            String answer = this.dialog.ask(question());
+            int number = Integer.parseInt(answer);
+            this.menuActions.get(number - 1).run();
+        }
     }
-
-    @Override
-    public String title() {
-        return title;
-    }
-
-//    private String question(){
-//        for (List<Action> action )
-//    }
-
 
     private String question() {
-        return this.actions.stream().map(Action::title).collect(Collectors.joining("\n", title, ""));
+        String viewMenu = menuActions.get(0).position() + " - " + menuActions.get(0).title();
+        for (int i = 1; i < menuActions.size(); i++) {
+            viewMenu = viewMenu + "\n" + menuActions.get(i).position() + " - " + menuActions.get(i).title();
+        }
+        return viewMenu;
     }
-
 }

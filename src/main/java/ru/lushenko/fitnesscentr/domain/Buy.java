@@ -12,8 +12,13 @@ public class Buy implements Identification {
     private String buyName;
 
     @Override
-    public String getId() { return this.buyId; }
-    public String getBuyName() { return this.buyName; }
+    public String getId() {
+        return this.buyId;
+    }
+
+    public String getBuyName() {
+        return this.buyName;
+    }
 
     @Override
     public boolean equals(Object o) {

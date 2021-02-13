@@ -7,14 +7,12 @@ import ru.lushenko.fitnesscentr.domain.Repository;
 
 public class CheckBuyAction implements Action {
 
-    private String title;
     private String question;
     private Repository<String, Buy> repository;
     private ConsoleDialog consoleDialog;
 
 
-    public CheckBuyAction(String title, String question, Repository<String, Buy> repository, ConsoleDialog consoleDialog) {
-        this.title = title;
+    public CheckBuyAction(String question, Repository<String, Buy> repository, ConsoleDialog consoleDialog) {
         this.question = question;
         this.repository = repository;
         this.consoleDialog = consoleDialog;
@@ -24,11 +22,6 @@ public class CheckBuyAction implements Action {
     public void run() {
         checkBuy();
         consoleDialog.printText("*********************************");
-    }
-
-    @Override
-    public String title() {
-        return title;
     }
 
     /***
@@ -42,7 +35,8 @@ public class CheckBuyAction implements Action {
                 //Считываем наименование абонемента по найденному ID
                 consoleDialog.printText("Ваш абонемент - " + buy.getBuyName());
                 checkStatus = true;
-                break; }
+                break;
+            }
         }
         if (checkStatus == false) {
             consoleDialog.printText("По данному ID покупка не найдена");

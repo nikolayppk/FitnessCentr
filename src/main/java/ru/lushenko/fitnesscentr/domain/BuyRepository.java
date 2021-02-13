@@ -4,13 +4,14 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BuyRepository implements Repository<String, Buy>{
+public class BuyRepository implements Repository<String, Buy> {
 
     private final File file;
 
     public BuyRepository(File file) {
         this.file = file;
     }
+
     public BuyRepository(String fileName) {
         this(new File(fileName));
     }

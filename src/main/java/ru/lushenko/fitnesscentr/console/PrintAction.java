@@ -1,15 +1,17 @@
 package ru.lushenko.fitnesscentr.console;
 
-public class PrintAction implements Action{
+public class PrintAction implements Action {
 
-    private final String title;
     private final String text;
-    private final ConsoleDialog consoleDialog;
+    private ConsoleDialog consoleDialog;
 
-    public PrintAction(String title, String text, ConsoleDialog consoleDialog) {
-        this.title = title;
+    public PrintAction(String text, ConsoleDialog consoleDialog) {
         this.text = text;
         this.consoleDialog = consoleDialog;
+    }
+
+    public PrintAction(String text) {
+        this.text = text;
     }
 
     @Override
@@ -17,8 +19,4 @@ public class PrintAction implements Action{
         consoleDialog.printText(text);
     }
 
-    @Override
-    public String title() {
-        return title;
-    }
 }

@@ -9,15 +9,12 @@ import ru.lushenko.fitnesscentr.domain.TypeSubscription;
 import java.util.Random;
 
 public class SelectBuyAction implements Action {
-
-    private String title;
     private String question;
     private Repository<String, TypeSubscription> repository;
     private Repository<String, Buy> buyRepository;
     private ConsoleDialog consoleDialog;
 
-    public SelectBuyAction(String title, String question, Repository<String, TypeSubscription> repository, Repository<String, Buy> buyRepository, ConsoleDialog consoleDialog) {
-        this.title = title;
+    public SelectBuyAction(String question, Repository<String, TypeSubscription> repository, Repository<String, Buy> buyRepository, ConsoleDialog consoleDialog) {
         this.question = question;
         this.repository = repository;
         this.buyRepository = buyRepository;
@@ -32,10 +29,6 @@ public class SelectBuyAction implements Action {
         consoleDialog.printText("*********************************");
     }
 
-    @Override
-    public String title() {
-        return title;
-    }
 
     /***
      * Метод для отображения абонементов

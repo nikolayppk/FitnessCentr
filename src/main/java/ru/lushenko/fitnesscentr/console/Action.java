@@ -4,6 +4,4 @@ public interface Action {
 
     void run();
 
-// TODO удалить
-    String title();
 }

@@ -2,11 +2,9 @@ package ru.lushenko.fitnesscentr;
 
 import ru.lushenko.fitnesscentr.action.CheckBuyAction;
 import ru.lushenko.fitnesscentr.action.SelectBuyAction;
-import ru.lushenko.fitnesscentr.action.SubscriptionAction;
-import ru.lushenko.fitnesscentr.console.BreakAction;
-import ru.lushenko.fitnesscentr.console.ConsoleDialog;
+import ru.lushenko.fitnesscentr.action.PrintSubscriptionAction;
 import ru.lushenko.fitnesscentr.console.Menu;
-import ru.lushenko.fitnesscentr.console.PrintAction;
+import ru.lushenko.fitnesscentr.console.*;
 import ru.lushenko.fitnesscentr.domain.*;
 
 import java.util.Arrays;
@@ -17,21 +15,17 @@ public class Main {
     private final Repository<String, Buy> buyRepository = new BuyRepository("listBuyId.txt");
     private final ConsoleDialog consoleDialog = new ConsoleDialog();
 
-    //TODO перенести цикл в класс Menu
     public void run() {
         hardCodeFillSubscription.fill(typeSubscriptionRepository);
-        while (true) {
-            new Menu(
-                    new ConsoleDialog(),
-                    "Выберите действие:", Arrays.asList(
-                    new PrintAction("", "", consoleDialog),
-                    new SubscriptionAction("1 - Показать список абонементов", typeSubscriptionRepository, consoleDialog),
-                    new SelectBuyAction("2 - Купить абонемент", "Выберите абонемент:", typeSubscriptionRepository, buyRepository, consoleDialog),
-                    new CheckBuyAction("3 - Проверка абонемента", "Введите ID покупки:", buyRepository, consoleDialog),
-                    new BreakAction("4 - Выход")
-                    )
-            ).run();
-        }
+        new Menu("Выбирите действие: ",
+                new ConsoleDialog(),
+                Arrays.asList(
+                        new DefaultMenuAction("Показать все абонементы", 1, new PrintSubscriptionAction(typeSubscriptionRepository, consoleDialog)),
+                        new DefaultMenuAction("Купить абонемент", 2, new SelectBuyAction("Выберите абонемент:", typeSubscriptionRepository, buyRepository, consoleDialog)),
+                        new DefaultMenuAction("Проверить абонемент", 3,new CheckBuyAction("Введите ID покупки:", buyRepository, consoleDialog)),
+                        new DefaultMenuAction("Выход", 4, new BreakAction(consoleDialog))
+                )
+        ).run();
     }
 
     public static void main(String[] args) {
