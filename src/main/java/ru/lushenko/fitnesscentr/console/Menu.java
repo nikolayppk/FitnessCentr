@@ -4,12 +4,10 @@ import java.util.List;
 
 public class Menu implements Action {
 
-    private final String title;
-    private final ConsoleDialog dialog;
+    private final Dialog dialog;
     private final List<DefaultMenuAction> menuActions;
 
-    public Menu(String title, ConsoleDialog dialog, List<DefaultMenuAction> menuActions) {
-        this.title = title;
+    public Menu(Dialog dialog, List<DefaultMenuAction> menuActions) {
         this.dialog = dialog;
         this.menuActions = menuActions;
     }
@@ -17,7 +15,6 @@ public class Menu implements Action {
     @Override
     public void run() {
         while (true) {
-            dialog.printText(this.title);
             String answer = this.dialog.ask(question());
             int number = Integer.parseInt(answer);
             this.menuActions.get(number - 1).run();

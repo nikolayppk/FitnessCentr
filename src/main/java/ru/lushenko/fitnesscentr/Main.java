@@ -1,7 +1,7 @@
 package ru.lushenko.fitnesscentr;
 
 import ru.lushenko.fitnesscentr.action.CheckBuyAction;
-import ru.lushenko.fitnesscentr.action.SelectBuyAction;
+import ru.lushenko.fitnesscentr.action.BuyAction;
 import ru.lushenko.fitnesscentr.action.PrintSubscriptionAction;
 import ru.lushenko.fitnesscentr.console.Menu;
 import ru.lushenko.fitnesscentr.console.*;
@@ -17,11 +17,11 @@ public class Main {
 
     public void run() {
         hardCodeFillSubscription.fill(typeSubscriptionRepository);
-        new Menu("Выбирите действие: ",
+        new Menu(
                 new ConsoleDialog(),
                 Arrays.asList(
                         new DefaultMenuAction("Показать все абонементы", 1, new PrintSubscriptionAction(typeSubscriptionRepository, consoleDialog)),
-                        new DefaultMenuAction("Купить абонемент", 2, new SelectBuyAction("Выберите абонемент:", typeSubscriptionRepository, buyRepository, consoleDialog)),
+                        new DefaultMenuAction("Купить абонемент", 2, new BuyAction("Выберите абонемент:", typeSubscriptionRepository, buyRepository, consoleDialog)),
                         new DefaultMenuAction("Проверить абонемент", 3,new CheckBuyAction("Введите ID покупки:", buyRepository, consoleDialog)),
                         new DefaultMenuAction("Выход", 4, new BreakAction(consoleDialog))
                 )
