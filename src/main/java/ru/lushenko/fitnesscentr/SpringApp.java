@@ -14,6 +14,6 @@ public class SpringApp {
         Menu menu = context.getBean("menu", Menu.class);
 
         hardCodeFillSubscription.fill(typeSubscriptionRepository);
-        menu.run();
+        //menu.run();
     }
 }

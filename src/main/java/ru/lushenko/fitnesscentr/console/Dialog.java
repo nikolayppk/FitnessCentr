@@ -9,4 +9,10 @@ public interface Dialog {
      */
     String  ask(String question) ;
 
+    /** Метод для отображения сообщения
+     *
+     * @param message - сообщение
+     */
+    void showMessage(String message);
+
 }

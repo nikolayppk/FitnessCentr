@@ -14,8 +14,8 @@ public class ConsoleDialog implements Dialog {
             throw new RuntimeException(e);
         }
     }
-
-    public void printText(String text) {
+    @Override
+    public void showMessage(String text) {
         System.out.println(text);
     }
 

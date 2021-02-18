@@ -18,7 +18,7 @@
     </bean>
     <bean id="consoleDialog"
           class="ru.lushenko.fitnesscentr.console.ConsoleDialog"/>
-    <bean id="printSubscriptionAction" class="ru.lushenko.fitnesscentr.action.PrintSubscriptionAction">
+    <bean id="printSubscriptionAction" class="ru.lushenko.fitnesscentr.action.ShowSubscriptionAction">
         <constructor-arg ref="inMemoryRepository"/>
         <constructor-arg ref="consoleDialog"/>
     </bean>

@@ -1,45 +1,31 @@
 package ru.lushenko.fitnesscentr.action;
 
 import ru.lushenko.fitnesscentr.console.Action;
-import ru.lushenko.fitnesscentr.console.ConsoleDialog;
+import ru.lushenko.fitnesscentr.console.Dialog;
 import ru.lushenko.fitnesscentr.domain.Buy;
 import ru.lushenko.fitnesscentr.domain.Repository;
 
 public class CheckBuyAction implements Action {
 
-    private String question;
-    private Repository<String, Buy> repository;
-    private ConsoleDialog consoleDialog;
+    private Repository<String, Buy> buyRepository;
 
-
-    public CheckBuyAction(String question, Repository<String, Buy> repository, ConsoleDialog consoleDialog) {
-        this.question = question;
-        this.repository = repository;
-        this.consoleDialog = consoleDialog;
+    public CheckBuyAction(Repository<String, Buy> repository) {
+        this.buyRepository = repository;
     }
 
     @Override
-    public void run() {
-        checkBuy();
-        consoleDialog.printText("*********************************");
+    public void run(Dialog dialog) {
+        String id = dialog.ask("Введите ID покупки:");
+        checkBuy(id, dialog);
     }
 
     /***
-     * Метод для проверки ID покупки
+     * Метод для проверки покупки
+     * @param id - id покупки по которой ищем запись
      */
-    private void checkBuy() {
-        String id = consoleDialog.ask(question);
-        boolean checkStatus = false;
-        for (Buy buy : repository.getAll()) {
-            if (buy.getId().equals(id)) {
-                //Считываем наименование абонемента по найденному ID
-                consoleDialog.printText("Ваш абонемент - " + buy.getBuyName());
-                checkStatus = true;
-                break;
-            }
-        }
-        if (checkStatus == false) {
-            consoleDialog.printText("По данному ID покупка не найдена");
-        }
+    private void checkBuy(String id, Dialog dialog) {
+        if (buyRepository.get(id) != null)
+            dialog.showMessage("Ваш абонемент - " + buyRepository.get(id).getBuyName());
+        else dialog.showMessage("По данному ID покупка не найдена");
     }
 }

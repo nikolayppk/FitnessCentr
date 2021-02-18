@@ -17,9 +17,29 @@ public class BuyRepository implements Repository<String, Buy> {
     }
 
     @Override
-    public Buy get(String s) {
-
-        return null;
+    public Buy get(String id) {
+        try {
+            Buy buy = null;
+            FileReader fileReader = new FileReader(file);
+            BufferedReader reader = new BufferedReader(fileReader);
+            // первая строчка ID покупки
+            String idBuy = reader.readLine();
+            // вторая строчка наименование покупки
+            String nameBuy = reader.readLine();
+            while (idBuy != null) {
+                if (idBuy.equals(id)) {
+                    buy = new Buy(nameBuy, idBuy);
+                    break;
+                }
+                else {
+                    idBuy = reader.readLine();
+                    nameBuy = reader.readLine();
+                }
+            }
+            return buy;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

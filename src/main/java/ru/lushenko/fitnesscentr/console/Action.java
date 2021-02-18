@@ -2,6 +2,7 @@ package ru.lushenko.fitnesscentr.console;
 
 public interface Action {
 
-    void run();
+    void run(Dialog dialog);
+
 
 }

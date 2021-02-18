@@ -1,7 +1,7 @@
 package ru.lushenko.fitnesscentr.action;
 
 import ru.lushenko.fitnesscentr.console.Action;
-import ru.lushenko.fitnesscentr.console.ConsoleDialog;
+import ru.lushenko.fitnesscentr.console.Dialog;
 import ru.lushenko.fitnesscentr.domain.Buy;
 import ru.lushenko.fitnesscentr.domain.Repository;
 import ru.lushenko.fitnesscentr.domain.TypeSubscription;
@@ -9,63 +9,23 @@ import ru.lushenko.fitnesscentr.domain.TypeSubscription;
 import java.util.Random;
 
 public class BuyAction implements Action {
-    private String question;
-    private Repository<String, TypeSubscription> repository;
+    private final TypeSubscription typeSubscription;
     private Repository<String, Buy> buyRepository;
-    private ConsoleDialog consoleDialog;
 
-    public BuyAction(String question, Repository<String, TypeSubscription> repository, Repository<String, Buy> buyRepository, ConsoleDialog consoleDialog) {
-        this.question = question;
-        this.repository = repository;
+    public BuyAction(TypeSubscription typeSubscription, Repository<String, Buy> buyRepository) {
         this.buyRepository = buyRepository;
-        this.consoleDialog = consoleDialog;
+        this.typeSubscription = typeSubscription;
     }
 
     @Override
-    public void run() {
-        printSubscription();
-        consoleDialog.printText(repository.getAll().size() + 1 + " - Назад");
-        buySubscription();
-        consoleDialog.printText("*********************************");
+    public void run(Dialog dialog) {
+    buySubscription(dialog);
     }
 
-
-    /***
-     * Метод для отображения абонементов
-     */
-    private void printSubscription() {
-        for (TypeSubscription typeSubscription : this.repository.getAll()) {
-            consoleDialog.printText(typeSubscription.getId() + " - " + typeSubscription.getName());
-        }
-    }
-
-    /***
-     * Метод для выполнения покупки
-     */
-    private void buySubscription() {
-        boolean doneBuy = false;
-        while (doneBuy == false) {
-            String position = consoleDialog.ask(question);
-            doneBuy = false;
-            for (TypeSubscription typeSubscription : repository.getAll()) {
-                int numberForExitInt = repository.getAll().size() + 1;
-                String numberForExit = "" + numberForExitInt;
-                if (position.equals(numberForExit)) {
-                    doneBuy = true;
-                    break;
-                } else if (typeSubscription.getId().equals(position)) {
-                    Buy buy = new Buy(typeSubscription.getName(), generationRandomId(5));
-                    /*Выполняем запись покупки*/
-                    buyRepository.add(buy);
-                    /*Отображение ID покупки*/
-                    consoleDialog.printText("Вы выбрали абонемент " + typeSubscription.getName() + ", ID покупки: " + buy.getId());
-                    doneBuy = true;
-                    break;
-                }
-            }
-            if (doneBuy == false)
-                consoleDialog.printText("Введенное значение отсутствует в списке. Введите корректное значение.");
-        }
+    private void buySubscription(Dialog dialog){
+        Buy buy = new Buy(typeSubscription.getName(), generationRandomId(5));
+        buyRepository.add(buy);
+        dialog.showMessage("Вы выбрали абонемент " + typeSubscription.getName() + ", ID покупки: " + buy.getId());
     }
 
     /*Генерируем ID покупки*/
@@ -81,5 +41,4 @@ public class BuyAction implements Action {
         }
         return builder.toString();
     }
-
 }

@@ -10,13 +10,9 @@ public class PrintAction implements Action {
         this.consoleDialog = consoleDialog;
     }
 
-    public PrintAction(String text) {
-        this.text = text;
-    }
-
     @Override
-    public void run() {
-        consoleDialog.printText(text);
+    public void run(Dialog dialog) {
+        consoleDialog.showMessage(text);
     }
 
 }
