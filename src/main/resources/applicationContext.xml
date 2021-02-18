@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util  http://www.springframework.org/schema/util/spring-util.xsd
+">
+    <bean id="inMemoryRepository"
+          class="ru.lushenko.fitnesscentr.domain.InMemoryRepository"/>
+    <bean id="hardCodeFillSubscription"
+          class="ru.lushenko.fitnesscentr.domain.HardCodeFillSubscription"/>
+    <bean id="dialog"
+          class="ru.lushenko.fitnesscentr.console.ConsoleDialog"/>
+    <bean id="buyRepository"
+          class="ru.lushenko.fitnesscentr.domain.BuyRepository">
+        <constructor-arg value="listBuyId.txt"/>
+    </bean>
+    <bean id="consoleDialog"
+          class="ru.lushenko.fitnesscentr.console.ConsoleDialog"/>
+    <bean id="printSubscriptionAction" class="ru.lushenko.fitnesscentr.action.PrintSubscriptionAction">
+        <constructor-arg ref="inMemoryRepository"/>
+        <constructor-arg ref="consoleDialog"/>
+    </bean>
+    <bean id="buyAction" class="ru.lushenko.fitnesscentr.action.BuyAction">
+        <constructor-arg name="question" value="Выберите абонемент:"/>
+        <constructor-arg ref="inMemoryRepository"/>
+        <constructor-arg ref="buyRepository"/>
+        <constructor-arg ref="consoleDialog"/>
+    </bean>
+    <bean id="checkBuyAction" class="ru.lushenko.fitnesscentr.action.CheckBuyAction">
+        <constructor-arg name="question" value="Введите ID покупки:"/>
+        <constructor-arg ref="buyRepository"/>
+        <constructor-arg ref="consoleDialog"/>
+    </bean>
+    <bean id="breakAction" class="ru.lushenko.fitnesscentr.console.BreakAction">
+        <constructor-arg ref="consoleDialog"/>
+    </bean>
+    <bean id="defaultMenuViewMenu" class="ru.lushenko.fitnesscentr.console.DefaultMenuAction">
+        <constructor-arg name="title" value="Показать все абонементы"/>
+        <constructor-arg name="position" value="1"/>
+        <constructor-arg ref="printSubscriptionAction"/>
+    </bean>
+    <bean id="defaultMenuBuySubscription" class="ru.lushenko.fitnesscentr.console.DefaultMenuAction">
+        <constructor-arg name="title" value="Купить абонемент"/>
+        <constructor-arg name="position" value="2"/>
+        <constructor-arg ref="buyAction"/>
+    </bean>
+    <bean id="defaultMenuCheckBuy" class="ru.lushenko.fitnesscentr.console.DefaultMenuAction">
+        <constructor-arg name="title" value="Проверить абонемент"/>
+        <constructor-arg name="position" value="3"/>
+        <constructor-arg ref="checkBuyAction"/>
+    </bean>
+    <bean id="defaultMenuExit" class="ru.lushenko.fitnesscentr.console.DefaultMenuAction">
+        <constructor-arg name="title" value="Выход"/>
+        <constructor-arg name="position" value="4"/>
+        <constructor-arg ref="breakAction"/>
+    </bean>
+    <bean id="menu"
+          class="ru.lushenko.fitnesscentr.console.Menu">
+        <constructor-arg ref="consoleDialog"/>
+        <constructor-arg>
+            <list>
+                <ref bean="defaultMenuViewMenu"/>
+                <ref bean="defaultMenuBuySubscription"/>
+                <ref bean="defaultMenuCheckBuy"/>
+                <ref bean="defaultMenuExit"/>
+            </list>
+        </constructor-arg>
+    </bean>
+</beans>
