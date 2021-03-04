@@ -24,8 +24,15 @@ public class CheckBuyAction implements Action {
      * @param id - id покупки по которой ищем запись
      */
     private void checkBuy(String id, Dialog dialog) {
-        if (buyRepository.get(id) != null)
-            dialog.showMessage("Ваш абонемент - " + buyRepository.get(id).getBuyName());
-        else dialog.showMessage("По данному ID покупка не найдена");
+        Boolean result = false;
+        for (Buy buy : buyRepository.getAll()) {
+            if (buy.getId().equals(id)) {
+                dialog.showMessage("Ваш абонемент - " + buy.getBuyName());
+                result = true;
+                break;
+            }
+        }
+        if (result == false)
+            dialog.showMessage("По данному ID покупка не найдена");
     }
 }

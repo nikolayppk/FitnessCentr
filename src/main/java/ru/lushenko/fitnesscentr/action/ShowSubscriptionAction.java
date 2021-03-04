@@ -5,11 +5,9 @@ import ru.lushenko.fitnesscentr.console.Dialog;
 import ru.lushenko.fitnesscentr.domain.Repository;
 import ru.lushenko.fitnesscentr.domain.TypeSubscription;
 
-
 public class ShowSubscriptionAction implements Action {
 
     private Repository<String, TypeSubscription> repository;
-
 
     public ShowSubscriptionAction(Repository<String, TypeSubscription> repository) {
         this.repository = repository;
@@ -20,5 +18,4 @@ public class ShowSubscriptionAction implements Action {
         for (TypeSubscription typeSubscription : this.repository.getAll())
             dialog.showMessage(typeSubscription.getDescription());
     }
-
 }

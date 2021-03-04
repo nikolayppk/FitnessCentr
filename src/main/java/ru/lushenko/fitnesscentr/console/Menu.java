@@ -19,17 +19,17 @@ public class Menu implements Action {
             dialog.showMessage(title);
             String answer = dialog.ask(question());
             number = Integer.parseInt(answer);
-            if (number == menuActions.size()) {
+            if (number == menuActions.size() + 1) {
                 break;
             } else menuActions.get(number - 1).run(dialog);
         }
     }
 
     private String question() {
-        String viewMenu = "1" + " - " + menuActions.get(0).title();
-        for (int i = 1; i < menuActions.size(); i++) {
-            viewMenu = viewMenu + "\n" + (i + 1) + " - " + menuActions.get(i).title();
+        StringBuilder menuItem = new StringBuilder();
+        for (int i = 0; i < menuActions.size(); i++) {
+            menuItem.append((i + 1)).append("-").append(menuActions.get(i).title()).append("\n");
         }
-        return viewMenu;
+        return menuItem.append(menuActions.size() + 1).append("-").append("Выход").toString();
     }
 }

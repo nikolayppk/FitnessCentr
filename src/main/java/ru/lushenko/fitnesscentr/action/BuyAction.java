@@ -19,10 +19,10 @@ public class BuyAction implements Action {
 
     @Override
     public void run(Dialog dialog) {
-    buySubscription(dialog);
+        buySubscription(dialog);
     }
 
-    private void buySubscription(Dialog dialog){
+    private void buySubscription(Dialog dialog) {
         Buy buy = new Buy(typeSubscription.getName(), generationRandomId(5));
         buyRepository.add(buy);
         dialog.showMessage("Вы выбрали абонемент " + typeSubscription.getName() + ", ID покупки: " + buy.getId());

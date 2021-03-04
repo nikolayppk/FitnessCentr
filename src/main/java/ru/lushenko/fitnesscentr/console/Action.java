@@ -1,8 +1,7 @@
 package ru.lushenko.fitnesscentr.console;
 
-public interface Action {
+public interface Action{
 
     void run(Dialog dialog);
-
 
 }
