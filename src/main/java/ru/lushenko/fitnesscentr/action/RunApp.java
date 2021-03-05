@@ -17,8 +17,7 @@ public class RunApp implements Action {
         new Menu("Выберите действие:",
                 Arrays.asList(
                         new DefaultMenuAction("Показать все абонементы", new ShowSubscriptionAction(typeSubscriptionRepository)),
-                        new DefaultMenuAction("Купить абонемент",
-                                new Menu("Выберите абонемент:", new SelectBuyAction(typeSubscriptionRepository, buyRepository).getDefaultMenuList())),
+                        new DefaultMenuAction("Купить абонемент", new SelectBuyAction(typeSubscriptionRepository, buyRepository)),
                         new DefaultMenuAction("Проверить абонемент", new CheckBuyAction(buyRepository))
                 )).run(dialog);
     }
