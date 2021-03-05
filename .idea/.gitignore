@@ -1,5 +1,5 @@
 .gradle
-.txt
+*.txt
 /build/
 
 # Ignore Gradle GUI config
