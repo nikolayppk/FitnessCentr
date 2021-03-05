@@ -9,9 +9,9 @@ import ru.lushenko.fitnesscentr.domain.*;
 import java.util.Arrays;
 
 public class RunApp implements Action {
-    private final Repository<String, TypeSubscription> typeSubscriptionRepository = new InMemoryRepository<>();
+    private final Repository<String, TypeSubscription> typeSubscriptionRepository = new InMemoryRepository<TypeSubscription>(
+            new HardCodeFillSubscription().getListSubscription());
     private final Repository<String, Buy> buyRepository = new BuyRepository("listBuyId.txt");
-    private final HardCodeFillSubscription hardCodeFillSubscription = new HardCodeFillSubscription(typeSubscriptionRepository);
 
     public void run(Dialog dialog) {
         new Menu("Выберите действие:",

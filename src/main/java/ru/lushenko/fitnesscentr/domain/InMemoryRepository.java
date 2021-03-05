@@ -5,9 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class InMemoryRepository<T extends Identification> implements Repository<String, T>{
+public class InMemoryRepository<T extends Identification> implements Repository<String, T> {
 
     private final Map<String, T> items = new HashMap<>();
+
+    public InMemoryRepository() {
+    }
+    public InMemoryRepository(List<TypeSubscription> typeSubscriptions) {
+        for (TypeSubscription typeSubscription : typeSubscriptions)
+        items.put(typeSubscription.getId(), (T) typeSubscription);
+    }
 
     @Override
     public T get(String id) {
@@ -16,7 +23,7 @@ public class InMemoryRepository<T extends Identification> implements Repository<
 
     @Override
     public void add(T item) {
-this.items.put(item.getId(), item);
+        this.items.put(item.getId(), item);
     }
 
     @Override

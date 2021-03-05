@@ -11,7 +11,6 @@ import java.util.List;
 public class SelectBuyAction implements Action {
     private final Repository<String, TypeSubscription> typeSubscriptionRepository;
     private final Repository<String, Buy> buyRepository;
-    private List<MenuAction> defaultMenuActionList;
 
     public SelectBuyAction(Repository<String, TypeSubscription> typeSubscriptionRepository, Repository<String, Buy> buyRepository) {
         this.typeSubscriptionRepository = typeSubscriptionRepository;
@@ -20,11 +19,11 @@ public class SelectBuyAction implements Action {
 
     @Override
     public void run(Dialog dialog) {
-        new Menu ("Выбирите абонемент", getDefaultMenuList()).run(dialog);
+        new Menu ("Выбирите абонемент", getListDefaultMenuAction()).run(dialog);
     }
 
-    public List<MenuAction> getDefaultMenuList() {
-        defaultMenuActionList = new ArrayList<>();
+    public List<MenuAction> getListDefaultMenuAction() {
+        List<MenuAction> defaultMenuActionList = new ArrayList<>();
         for (TypeSubscription subscription : this.typeSubscriptionRepository.getAll())
             defaultMenuActionList.add(new DefaultMenuAction(subscription.getName(), new BuyAction(subscription, this.buyRepository)));
         return defaultMenuActionList;
