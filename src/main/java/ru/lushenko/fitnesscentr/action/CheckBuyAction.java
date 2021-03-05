@@ -16,23 +16,10 @@ public class CheckBuyAction implements Action {
     @Override
     public void run(Dialog dialog) {
         String id = dialog.ask("Введите ID покупки:");
-        checkBuy(id, dialog);
-    }
-
-    /***
-     * Метод для проверки покупки
-     * @param id - id покупки по которой ищем запись
-     */
-    private void checkBuy(String id, Dialog dialog) {
-        Boolean result = false;
-        for (Buy buy : buyRepository.getAll()) {
-            if (buy.getId().equals(id)) {
-                dialog.showMessage("Ваш абонемент - " + buy.getBuyName());
-                result = true;
-                break;
-            }
-        }
-        if (result == false)
-            dialog.showMessage("По данному ID покупка не найдена");
+        Buy buy = buyRepository.get(id);
+        if (buy != null) {
+            dialog.showMessage("Ваш абонемент - " + buy.getBuyName());
+        } else dialog.showMessage("По данному ID покупка не найдена");
     }
 }
+

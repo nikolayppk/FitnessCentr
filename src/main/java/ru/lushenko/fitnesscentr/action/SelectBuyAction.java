@@ -19,7 +19,7 @@ public class SelectBuyAction implements Action {
 
     @Override
     public void run(Dialog dialog) {
-        new Menu ("Выбирите абонемент", getListDefaultMenuAction()).run(dialog);
+        new Menu("Выбирите абонемент для покупки:", getListDefaultMenuAction()).run(dialog);
     }
 
     public List<MenuAction> getListDefaultMenuAction() {

@@ -30,8 +30,7 @@ public class BuyRepository implements Repository<String, Buy> {
                 if (idBuy.equals(id)) {
                     buy = new Buy(nameBuy, idBuy);
                     break;
-                }
-                else {
+                } else {
                     idBuy = reader.readLine();
                     nameBuy = reader.readLine();
                 }
