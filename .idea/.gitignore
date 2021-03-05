@@ -9,5 +9,4 @@ gradle-app.setting
 
 # Cache of project
 .gradletasknamecache
-TaskFitnessCentr/*.txt
-TaskJava/*.txt
+*.txt
