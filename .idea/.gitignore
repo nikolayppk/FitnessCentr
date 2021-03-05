@@ -1,5 +1,4 @@
 .gradle
-*.txt
 /build/
 
 # Ignore Gradle GUI config
@@ -10,3 +9,4 @@ gradle-app.setting
 
 # Cache of project
 .gradletasknamecache
+TaskJava/*.txt
